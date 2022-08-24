@@ -73,8 +73,6 @@ class ProductsViewController: UIViewController {
         }
         
         bottomActionViewHeightConstraint.constant = 0
-        
-//        layer.shadowColor = UIColor.black.cgColor
         bottomActionView.layer.shadowOpacity = 0.3
         bottomActionView.layer.shadowOffset = .zero
         bottomActionView.layer.shadowRadius = 5
@@ -164,24 +162,18 @@ extension ProductsViewController: UICollectionViewDelegate{
         switch indexPath.section{
         case 0:
             content.text = folders[indexPath.row]
-//            content.secondaryText = products[indexPath.row].productDescription
-
-//            cell.accessories = [.multiselect(displayed: .whenEditing, options: .init())]
             
-            cell.contentConfiguration = content
         case 1:
             content.text = products[indexPath.row].title
             content.secondaryText = products[indexPath.row].productDescription
             content.prefersSideBySideTextAndSecondaryText = false
             content.secondaryTextProperties.font = UIFont.preferredFont(forTextStyle: .subheadline)
-
             cell.accessories = [.multiselect(displayed: .whenEditing, options: .init())]
             
-            cell.contentConfiguration = content
-//            return products.count
-        default:
+            default:
             return UICollectionViewCell()
         }
+        cell.contentConfiguration = content
         
 
         return cell
@@ -197,7 +189,6 @@ extension ProductsViewController: UICollectionViewDelegate{
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("didselect")
         switch indexPath.section{
         case 0:
             collectionView.deselectItem(at: indexPath, animated: true)
@@ -208,7 +199,6 @@ extension ProductsViewController: UICollectionViewDelegate{
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        print("diddeselect")
         if collectionView.indexPathsForSelectedItems?.contains(where: {$0.section == 1}) == true{
             moveButton.isEnabled = true
         }else{
